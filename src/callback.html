@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>spotifly callback</title>
+</head>
+<body>
+  <script>
+    const searchParams = new URLSearchParams(window.location.search);
+    const queryString = JSON.stringify(Object.fromEntries(searchParams), null, 2);
+    const pre = document.createElement('pre');
+    pre.textContent = queryString;
+    document.body.appendChild(pre);
+  </script>
+</body>
+</html>

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "scrape": "npx ts-node src/index.ts"
   },
   "author": "jaredlwong",
   "license": "MIT",

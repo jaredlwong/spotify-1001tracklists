@@ -63,10 +63,10 @@ async function getSecret(itemName: string, label: string): Promise<string> {
   return result.stdout.trim();
 }
 
-async function scrape(url: string) {
+async function scrape(headless: boolean, url: string) {
   const browser = await puppeteer.use(StealthPlugin())
     .launch({
-      headless: false,
+      headless: headless,
       executablePath: '/opt/homebrew/bin/chromium',
     });
   const page = await browser.newPage();
@@ -239,18 +239,20 @@ async function spotify_command() {
 async function main() {
   const program = new Command();
   program
-    .command('scrape')
+    .command('scrape <url>')
     .description('scrape 1001tracklists')
-    .arguments('<url>')
+    .option('--no-headless', 'disable headless mode')
     .action(async (url, options) => {
+      const headless = options.headless ?? true;
       try {
-        await scrape(url);
+        await scrape(headless, url);
         // await spot();
       } catch (err: any) {
         console.error(`Error: ${err.message}`)
       }
     });
   
+  console.log(process.argv)
   await program.parseAsync(process.argv);
 }
   
